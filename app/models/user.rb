@@ -6,4 +6,6 @@ class User < ApplicationRecord
 
   has_one :user_configuration, dependent: :destroy
   has_many :boards, dependent: :destroy
+
+  before_create :build_user_configuration
 end
