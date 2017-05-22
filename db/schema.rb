@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170420130151) do
+ActiveRecord::Schema.define(version: 20170522181856) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -41,6 +41,15 @@ ActiveRecord::Schema.define(version: 20170420130151) do
     t.index ["board_id"], name: "index_lists_on_board_id"
   end
 
+  create_table "user_configurations", force: :cascade do |t|
+    t.string "developer_public_key"
+    t.string "member_token"
+    t.bigint "user_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["user_id"], name: "index_user_configurations_on_user_id"
+  end
+
   create_table "users", force: :cascade do |t|
     t.string "email", default: "", null: false
     t.string "encrypted_password", default: "", null: false
@@ -61,4 +70,5 @@ ActiveRecord::Schema.define(version: 20170420130151) do
   add_foreign_key "boards", "users"
   add_foreign_key "cards", "lists"
   add_foreign_key "lists", "boards"
+  add_foreign_key "user_configurations", "users"
 end
