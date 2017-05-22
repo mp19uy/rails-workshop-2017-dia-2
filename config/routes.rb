@@ -7,5 +7,7 @@ Rails.application.routes.draw do
     end
   end
 
+  resource :user_configuration, only: [:edit, :update]
+
   root 'boards#index'
 end
